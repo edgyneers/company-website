@@ -2,7 +2,7 @@
 interface Props { label: string }
 const { label } = Astro.props;
 ---
-<svg role="img" aria-label={label} viewBox="0 0 300 420">
+<svg role="img" aria-label={label} viewBox="0 0 300 420" class="w-[72%] max-w-80">
   <path d="M150 6 C190 120 284 190 284 300 V420 H16 V300 C16 190 110 120 150 6Z" fill="#0E1424" />
   <path d="M150 40 C182 140 262 200 262 300 V420 M150 40 C118 140 38 200 38 300 V420" fill="none" stroke="#F3EFE6" stroke-width="2" />
   <path d="M150 70 V360" stroke="#F3EFE6" stroke-width="4" />
@@ -18,7 +18,3 @@ const { label } = Astro.props;
   <path d="M108 420 V384 Q108 352 150 352 Q192 352 192 384 V420Z" fill="#A2513A" />
   <path d="M122 420 V388 Q122 366 150 366 Q178 366 178 388 V420" fill="none" stroke="#F3EFE6" stroke-width="2" />
 </svg>
-
-<style>
-  svg { width: 72%; max-width: 320px; }
-</style>

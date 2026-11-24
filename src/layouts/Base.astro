@@ -13,6 +13,8 @@ interface Props {
 const { lang, page, title } = Astro.props;
 const c = t(lang);
 const langs = Object.keys(languages) as Lang[];
+const navLink =
+  'inline-flex min-h-11 items-center rounded-full border-[1.5px] px-[18px] text-[15px] font-semibold no-underline aria-[current=page]:bg-navy aria-[current=page]:text-cream';
 const canonical = new URL(localePath(lang, page), Astro.site);
 ---
 <!doctype html>
@@ -33,23 +35,24 @@ const canonical = new URL(localePath(lang, page), Astro.site);
     <meta property="og:image" content={new URL('/og-image.jpg', Astro.site)} />
   </head>
   <body>
-    <header class="site-header">
-      <nav aria-label={c.nav.main} class="wrap nav">
-        <a href={localePath(lang, '')} class="brand">
-          <Logo height={30} class="brand-mark" />
-          <span class="brand-name">{site.name}</span>
+    <header class="border-b border-rule bg-cream sticky top-0 z-50">
+      <nav aria-label={c.nav.main} class="wrap flex flex-wrap items-center justify-between gap-4 py-5">
+        <a href={localePath(lang, '')} class="flex items-center gap-3 text-navy no-underline">
+          <Logo height={30} class="text-navy" />
+          <span class="font-serif text-[22px] font-extrabold tracking-[-0.01em]">{site.name}</span>
         </a>
-        <div class="nav-links">
-          <a href={localePath(lang, '')} class="nav-link" aria-current={page === '' ? 'page' : undefined}>{c.nav.projects}</a>
-          <a href={localePath(lang, 'about')} class="nav-link" aria-current={page === 'about' ? 'page' : undefined}>{c.nav.about}</a>
-          <a href={site.instagram} class="nav-link nav-outline" rel="noopener">Instagram ↗</a>
-          <div class="lang" role="group" aria-label={c.nav.language}>
+        <div class="flex flex-wrap items-center gap-2">
+          <a href={localePath(lang, '')} class={`${navLink} border-transparent`} aria-current={page === '' ? 'page' : undefined}>{c.nav.projects}</a>
+          <a href={localePath(lang, 'about')} class={`${navLink} border-transparent`} aria-current={page === 'about' ? 'page' : undefined}>{c.nav.about}</a>
+          <a href={site.instagram} class={`${navLink} border-navy`} rel="noopener">Instagram ↗</a>
+          <div class="ml-2 flex rounded-full bg-sand p-1" role="group" aria-label={c.nav.language}>
             {langs.map((l) => (
               <a
                 href={localePath(l, page)}
                 hreflang={l}
                 lang={l}
                 aria-current={l === lang ? 'true' : undefined}
+                class="inline-flex min-h-10 min-w-11 items-center justify-center rounded-full px-3.5 text-sm font-bold no-underline aria-[current=true]:bg-terracotta aria-[current=true]:text-cream"
               >{languages[l]}</a>
             ))}
           </div>
@@ -61,15 +64,15 @@ const canonical = new URL(localePath(lang, page), Astro.site);
       <slot />
     </main>
 
-    <footer class="site-footer">
+    <footer class="bg-navy text-cream">
       <DiamondStrip id="dm-footer" />
-      <div class="wrap footer-inner">
-        <div class="footer-brand">
+      <div class="wrap flex flex-wrap justify-between gap-8 py-14">
+        <div class="flex flex-col gap-2.5">
           <Logo height={44} />
-          <span class="serif footer-name">{site.name}</span>
-          <span class="footer-tag">{c.tagline.a} {c.tagline.b} {c.tagline.c} {c.tagline.d}</span>
+          <span class="font-serif text-[28px] font-extrabold">{site.name}</span>
+          <span class="text-stone">{c.tagline.a} {c.tagline.b} {c.tagline.c} {c.tagline.d}</span>
         </div>
-        <div class="footer-links">
+        <div class="flex flex-wrap items-center gap-x-7 gap-y-2 text-[15px] [&_a]:text-cream [&_a:hover]:text-mustard-light">
           <a href={localePath(lang, '')}>{c.nav.projects}</a>
           <a href={localePath(lang, 'about')}>{c.nav.about}</a>
           <a href={site.instagram} rel="noopener">{site.instagramHandle}</a>
@@ -79,27 +82,3 @@ const canonical = new URL(localePath(lang, page), Astro.site);
     </footer>
   </body>
 </html>
-
-<style>
-  .site-header { border-bottom: 1px solid #d9d1c2; background: var(--cream); }
-  .nav { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding-block: 20px; }
-  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--navy); }
-  .brand :global(.brand-mark) { color: var(--navy); }
-  .brand-name { font-family: var(--serif); font-weight: 800; font-size: 22px; letter-spacing: -.01em; }
-  .nav-links { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
-  .nav-link { display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 999px; text-decoration: none; font-weight: 600; font-size: 15px; border: 1.5px solid transparent; }
-  .nav-link[aria-current='page'] { background: var(--navy); color: var(--cream); }
-  .nav-outline { border-color: var(--navy); }
-  .lang { display: flex; padding: 4px; border-radius: 999px; background: var(--sand); margin-left: 8px; }
-  .lang a { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 40px; padding: 0 14px; border-radius: 999px; text-decoration: none; font-weight: 700; font-size: 14px; }
-  .lang a[aria-current='true'] { background: var(--terracotta); color: var(--cream); }
-
-  .site-footer { background: var(--navy); color: var(--cream); }
-  .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 32px; padding-block: 56px; }
-  .footer-brand { display: flex; flex-direction: column; gap: 10px; }
-  .footer-name { font-weight: 800; font-size: 28px; }
-  .footer-tag { color: #c9c4ba; }
-  .footer-links { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 28px; font-size: 15px; }
-  .footer-links a { color: var(--cream); }
-  .footer-links a:hover { color: var(--mustard-light); }
-</style>

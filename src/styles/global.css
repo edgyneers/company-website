@@ -1,66 +1,56 @@
 @import '@fontsource-variable/playfair-display';
 @import '@fontsource-variable/plus-jakarta-sans';
+@import 'tailwindcss';
 
-:root {
-  --navy: #0e1424;
-  --terracotta: #a2513a;
-  --terracotta-dark: #8e4431;
-  --mustard: #dfa942;
-  --mustard-light: #f2c46a;
-  --cream: #f3efe6;
-  --sand: #e9e2d4;
-  --line: #e2dacb;
-  --ink-soft: #2a2f3d;
-  --muted: #5b5548;
-  --serif: 'Playfair Display Variable', Georgia, serif;
-  --sans: 'Plus Jakarta Sans Variable', system-ui, sans-serif;
-  --wrap: 1200px;
+/* Brand tokens → Tailwind utilities: bg-navy, text-terracotta, font-serif, max-w-wrap, … */
+@theme {
+  --color-navy: #0e1424;
+  --color-terracotta: #a2513a;
+  --color-terracotta-dark: #8e4431;
+  --color-mustard: #dfa942;
+  --color-mustard-light: #f2c46a;
+  --color-cream: #f3efe6;
+  --color-sand: #e9e2d4;
+  --color-line: #e2dacb;
+  --color-rule: #d9d1c2;
+  --color-ink-soft: #2a2f3d;
+  --color-muted: #5b5548;
+  --color-stone: #c9c4ba;
+
+  --font-serif: 'Playfair Display Variable', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans Variable', system-ui, sans-serif;
+
+  --container-wrap: 1200px;
 }
 
-*, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
-body {
-  margin: 0;
-  background: var(--cream);
-  color: var(--navy);
-  font-family: var(--sans);
-  line-height: 1.5;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+@layer base {
+  body {
+    @apply flex min-h-screen flex-col bg-cream font-sans leading-normal text-navy;
+  }
+  main { @apply flex-[1_0_auto]; }
+  a { @apply text-navy hover:text-terracotta; }
+  :focus-visible { @apply outline-3 outline-offset-3 outline-mustard; }
 }
-main { flex: 1 0 auto; }
-img, svg { display: block; max-width: 100%; }
-a { color: var(--navy); }
-a:hover { color: var(--terracotta); }
-:focus-visible { outline: 3px solid var(--mustard); outline-offset: 3px; }
 
-.wrap { max-width: var(--wrap); margin: 0 auto; padding-inline: 32px; width: 100%; }
-.serif { font-family: var(--serif); }
-.eyebrow { margin: 0; font-size: 14px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--terracotta); }
+/* Patterns repeated across pages. */
+@layer components {
+  .wrap { @apply mx-auto w-full max-w-wrap px-8; }
 
-/* Pill buttons */
-.btn {
-  display: inline-flex; align-items: center; min-height: 48px; padding: 0 22px;
-  border-radius: 999px; text-decoration: none; font-weight: 700; font-size: 15px;
-  border: 1.5px solid transparent;
+  .eyebrow { @apply m-0 text-sm font-bold tracking-[0.16em] text-terracotta uppercase; }
+
+  .btn {
+    @apply inline-flex min-h-12 items-center rounded-full border-[1.5px] border-transparent px-[22px] text-[15px] font-bold no-underline;
+  }
+  .btn-dark { @apply bg-navy text-cream hover:text-mustard-light; }
+  .btn-outline { @apply border-navy; }
+  .btn-mustard { @apply bg-mustard text-navy hover:bg-mustard-light hover:text-navy; }
+  .btn-cream { @apply bg-cream text-navy; }
+
+  .chip { @apply rounded-full bg-cream px-3 py-1.5 text-[13px] font-semibold; }
+
+  /* Big headline with a trailing rule, like the "Team" post. */
+  .rule-heading { @apply flex items-end gap-6 after:mb-[22px] after:h-[1.5px] after:flex-auto after:bg-navy after:content-['']; }
+  .rule-heading > :is(h1, h2) {
+    @apply m-0 font-serif text-[clamp(64px,10vw,136px)] leading-[0.9] font-black tracking-[-0.03em];
+  }
 }
-.btn-dark { background: var(--navy); color: var(--cream); }
-.btn-dark:hover { color: var(--mustard-light); }
-.btn-outline { border-color: var(--navy); }
-.btn-mustard { background: var(--mustard); color: var(--navy); }
-.btn-mustard:hover { color: var(--navy); background: var(--mustard-light); }
-.btn-cream { background: var(--cream); color: var(--navy); }
-
-/* Big headline with trailing rule, like the "Team" post */
-.rule-heading { display: flex; align-items: flex-end; gap: 24px; }
-.rule-heading h1, .rule-heading h2 {
-  margin: 0; font-family: var(--serif); font-weight: 900;
-  font-size: clamp(64px, 10vw, 136px); line-height: .9; letter-spacing: -.03em;
-}
-.rule-heading::after { content: ''; flex: 1 1 auto; height: 1.5px; background: var(--navy); margin-bottom: 22px; }
-
-.chip { padding: 6px 12px; border-radius: 999px; background: var(--cream); font-size: 13px; font-weight: 600; }
-.chip-dark { background: var(--navy); color: var(--cream); }
-
-.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }

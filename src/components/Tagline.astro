@@ -3,9 +3,4 @@ import { t, type Lang } from '../i18n/ui';
 interface Props { lang: Lang }
 const { tagline } = t(Astro.props.lang);
 ---
-<span class="tagline">{tagline.a} <u>{tagline.b}</u> {tagline.c} <u>{tagline.d}</u></span>
-
-<style>
-  .tagline { font-size: 18px; font-weight: 600; }
-  u { color: var(--mustard-light); text-underline-offset: 6px; }
-</style>
+<span class="text-lg font-semibold [&_u]:text-mustard-light [&_u]:underline-offset-[6px]">{tagline.a} <u>{tagline.b}</u> {tagline.c} <u>{tagline.d}</u></span>

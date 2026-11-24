@@ -10,48 +10,50 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const c = t(lang);
 const a = c.about;
+const memberLink =
+  'inline-flex min-h-10 items-center gap-2 rounded-full bg-cream px-3.5 text-sm font-semibold no-underline hover:bg-navy hover:text-cream';
 
 ---
 <Base lang={lang} page="about" title={c.meta.aboutTitle}>
-  <section class="hero" aria-labelledby="about-title">
+  <section class="flex" aria-labelledby="about-title">
     <DiamondStrip id="dm-about" orientation="vertical" size={96} />
-    <div class="hero-inner">
-      <div class="rule-heading"><h1 id="about-title" class="about-h1">{a.heading}</h1></div>
-      <p class="hero-name">{site.name}</p>
-      <p class="serif hero-lead">{a.lead}</p>
+    <div class="mx-auto flex max-w-[1104px] min-w-0 flex-auto flex-col gap-8 px-8 pt-[clamp(64px,9vw,112px)] pb-24">
+      <div class="rule-heading"><h1 id="about-title" class="text-[clamp(72px,12vw,160px)]! leading-[0.85]!">{a.heading}</h1></div>
+      <p class="m-0 text-[22px] font-medium">{site.name}</p>
+      <p class="m-0 max-w-[820px] font-serif text-[clamp(24px,3vw,38px)] leading-[1.3] font-bold">{a.lead}</p>
     </div>
   </section>
 
-  <section class="wrap story">
-    <div class="story-head">
+  <section class="wrap flex flex-wrap gap-x-16 gap-y-8 pt-8 pb-24">
+    <div class="flex flex-[1_1_300px] flex-col gap-3">
       <p class="eyebrow">{a.storyLabel}</p>
-      <p class="serif story-title">{a.storyTitle}</p>
+      <p class="m-0 font-serif text-[32px] leading-[1.15] font-extrabold">{a.storyTitle}</p>
     </div>
-    <div class="story-body">
-      {a.story.map((para) => <p>{para}</p>)}
+    <div class="flex-[999_1_520px] text-lg leading-[1.7] text-ink-soft">
+      {a.story.map((para) => <p class="mt-0 mb-5">{para}</p>)}
     </div>
   </section>
 
-  <section class="how" aria-labelledby="how-title">
-    <div class="wrap how-inner">
-      <h2 id="how-title" class="serif how-title">{a.howTitle}</h2>
-      <div class="how-grid">
+  <section class="bg-terracotta text-cream" aria-labelledby="how-title">
+    <div class="wrap flex flex-col gap-12 py-24">
+      <h2 id="how-title" class="m-0 font-serif text-[clamp(44px,6vw,72px)] leading-none font-black tracking-[-0.02em]">{a.howTitle}</h2>
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-6">
         {a.how.map((h, i) => (
-          <div class="how-card">
-            <span class="serif how-n">{String(i + 1).padStart(2, '0')}</span>
-            <h3>{h.title}</h3>
-            <p>{h.body}</p>
+          <div class="flex flex-col gap-3 rounded-[20px] bg-terracotta-dark p-8">
+            <span class="font-serif text-[40px] font-black text-mustard-light">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="m-0 text-[22px] font-bold">{h.title}</h3>
+            <p class="m-0 leading-[1.6]">{h.body}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="wrap team" aria-labelledby="team-title">
-    <div class="rule-heading team-head"><h2 id="team-title">{a.teamTitle}</h2></div>
-    <ul class="team-grid">
+  <section class="wrap py-28" aria-labelledby="team-title">
+    <div class="rule-heading mb-12"><h2 id="team-title">{a.teamTitle}</h2></div>
+    <ul class="m-0 grid list-none grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-6 p-0">
       {team.map((m) => (
-        <li class="member">
+        <li class="flex flex-col overflow-hidden rounded-[20px] border border-line bg-white">
           <Image
             src={m.photo}
             alt={m.name}
@@ -60,18 +62,18 @@ const a = c.about;
             format="webp"
             quality={80}
             loading="lazy"
-            class="member-photo"
+            class="block aspect-[1080/1350] h-auto w-full bg-sand object-cover"
           />
-          <div class="member-info">
-            <h3>{m.name}</h3>
-            <p class="member-role">{m.role[lang]}</p>
-            <div class="member-links">
-              <a href={m.linkedin} rel="noopener" aria-label={`${m.name} — LinkedIn`}>
+          <div class="flex flex-col gap-1 px-6 pt-5 pb-6">
+            <h3 class="m-0 text-xl font-bold">{m.name}</h3>
+            <p class="m-0 text-muted">{m.role[lang]}</p>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <a href={m.linkedin} rel="noopener" aria-label={`${m.name} — LinkedIn`} class={memberLink}>
                 <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.5h4V21H3V9.5Zm7 0h3.8v1.6h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.2c0-1.24-.02-2.84-1.73-2.84-1.73 0-2 1.35-2 2.75V21h-4V9.5Z" /></svg>
                 LinkedIn
               </a>
               {m.website && (
-                <a href={m.website} rel="noopener" aria-label={`${m.name} — ${a.website}`}>
+                <a href={m.website} rel="noopener" aria-label={`${m.name} — ${a.website}`} class={memberLink}>
                   <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3Z" /></svg>
                   {a.website}
                 </a>
@@ -84,52 +86,12 @@ const a = c.about;
   </section>
 
   <section class="wrap">
-    <div class="cta">
-      <div class="cta-text">
-        <h2 class="serif cta-title">{a.ctaTitle}</h2>
-        <p>{a.ctaBody}</p>
+    <div class="mb-28 flex flex-wrap items-center justify-between gap-6 rounded-3xl bg-mustard px-[clamp(28px,4vw,48px)] py-[clamp(32px,5vw,56px)]">
+      <div class="flex-[1_1_480px]">
+        <h2 class="mt-0 mb-2.5 font-serif text-[clamp(32px,5vw,56px)] leading-[1.05] font-black tracking-[-0.02em]">{a.ctaTitle}</h2>
+        <p class="m-0 text-lg">{a.ctaBody}</p>
       </div>
       <a href={`mailto:${site.email}`} class="btn btn-dark">{a.ctaButton}</a>
     </div>
   </section>
 </Base>
-
-<style>
-  .hero { display: flex; }
-  .hero-inner { flex: 1 1 auto; min-width: 0; max-width: 1104px; margin: 0 auto; padding: clamp(64px, 9vw, 112px) 32px 96px; display: flex; flex-direction: column; gap: 32px; }
-  .rule-heading .about-h1 { font-size: clamp(72px, 12vw, 160px); line-height: .85; }
-  .hero-name { margin: 0; font-size: 22px; font-weight: 500; }
-  .hero-lead { margin: 0; max-width: 820px; font-weight: 700; font-size: clamp(24px, 3vw, 38px); line-height: 1.3; }
-
-  .story { display: flex; flex-wrap: wrap; gap: 32px 64px; padding-block: 32px 96px; }
-  .story-head { flex: 1 1 300px; display: flex; flex-direction: column; gap: 12px; }
-  .story-title { margin: 0; font-weight: 800; font-size: 32px; line-height: 1.15; }
-  .story-body { flex: 999 1 520px; font-size: 18px; line-height: 1.7; color: var(--ink-soft); }
-  .story-body p { margin: 0 0 20px; }
-
-  .how { background: var(--terracotta); color: var(--cream); }
-  .how-inner { padding-block: 96px; display: flex; flex-direction: column; gap: 48px; }
-  .how-title { margin: 0; font-weight: 900; font-size: clamp(44px, 6vw, 72px); line-height: 1; letter-spacing: -.02em; }
-  .how-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
-  .how-card { padding: 32px; border-radius: 20px; background: var(--terracotta-dark); display: flex; flex-direction: column; gap: 12px; }
-  .how-n { font-weight: 900; font-size: 40px; color: var(--mustard-light); }
-  .how-card h3 { margin: 0; font-size: 22px; }
-  .how-card p { margin: 0; line-height: 1.6; }
-
-  .team { padding-block: 112px; }
-  .team-head { margin-bottom: 48px; }
-  .team-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
-  .member { border-radius: 20px; overflow: hidden; background: #fff; border: 1px solid var(--line); display: flex; flex-direction: column; }
-  .member :global(.member-photo) { display: block; width: 100%; height: auto; aspect-ratio: 1080 / 1350; object-fit: cover; background: var(--sand); }
-  .member-info { padding: 20px 24px 24px; display: flex; flex-direction: column; gap: 4px; }
-  .member-info h3 { margin: 0; font-size: 20px; }
-  .member-role { margin: 0; color: var(--muted); }
-  .member-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-  .member-links a { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 14px; border-radius: 999px; background: var(--cream); text-decoration: none; font-weight: 600; font-size: 14px; }
-  .member-links a:hover { background: var(--navy); color: var(--cream); }
-
-  .cta { margin-bottom: 112px; border-radius: 24px; background: var(--mustard); padding: clamp(32px, 5vw, 56px) clamp(28px, 4vw, 48px); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; }
-  .cta-text { flex: 1 1 480px; }
-  .cta-title { margin: 0 0 10px; font-weight: 900; font-size: clamp(32px, 5vw, 56px); line-height: 1.05; letter-spacing: -.02em; }
-  .cta-text p { margin: 0; font-size: 18px; }
-</style>

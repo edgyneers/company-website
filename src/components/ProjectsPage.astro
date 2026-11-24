@@ -14,101 +14,75 @@ const ytUrl = `https://www.youtube.com/watch?v=${site.youtubeId}`;
 ---
 <Base lang={lang} page="" title={c.meta.projectsTitle}>
   <!-- Film -->
-  <section class="film" aria-labelledby="film-title">
+  <section class="flex bg-navy text-cream" aria-labelledby="film-title">
     <DiamondStrip id="dm-film" orientation="vertical" size={56} />
-    <div class="film-inner">
-      <div class="film-top">
-        <p class="eyebrow mustard">{p.filmEyebrow}</p>
-        <p class="film-meta">{p.filmMeta}</p>
+    <div class="mx-auto flex max-w-[1144px] min-w-0 flex-auto flex-col gap-6 px-8 pt-14 pb-16">
+      <div class="flex flex-wrap items-baseline justify-between gap-4">
+        <p class="eyebrow text-mustard">{p.filmEyebrow}</p>
+        <p class="m-0 text-[15px] text-stone">{p.filmMeta}</p>
       </div>
       <YouTubeFacade videoId={site.youtubeId} label={p.filmPlay} lang={lang} />
-      <div class="film-bottom">
-        <h1 id="film-title" class="serif film-title">{p.filmTitle[0]}<br />{p.filmTitle[1]}</h1>
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <h1 id="film-title" class="m-0 font-serif text-[clamp(40px,6vw,72px)] leading-none font-black tracking-[-0.02em]">{p.filmTitle[0]}<br />{p.filmTitle[1]}</h1>
         <a href={ytUrl} class="btn btn-mustard" rel="noopener">{p.watchYoutube}</a>
       </div>
     </div>
   </section>
 
   <!-- Intro -->
-  <section class="wrap intro">
-    <p class="eyebrow intro-label">{p.introLabel}</p>
-    <p class="serif intro-text">{p.intro}</p>
+  <section class="wrap flex flex-wrap gap-x-16 gap-y-8 pt-24 pb-12">
+    <p class="eyebrow flex-[1_1_240px]">{p.introLabel}</p>
+    <p class="m-0 flex-[999_1_560px] font-serif text-[clamp(24px,3vw,38px)] leading-[1.3] font-bold">{p.intro}</p>
   </section>
 
   <!-- Projects -->
   <section class="wrap" aria-labelledby="projects-title">
-    <div class="rule-heading heading-pad"><h2 id="projects-title">{p.heading}</h2></div>
+    <div class="rule-heading py-12"><h2 id="projects-title">{p.heading}</h2></div>
 
-    <article class="project">
-      <div class="project-art"><GedoganIllo label={p.illoAlt} /></div>
-      <div class="project-body">
-        <div class="chips">
-          <span class="chip chip-dark">{p.featured}</span>
+    <article class="flex flex-wrap overflow-hidden rounded-3xl border border-line bg-white">
+      <div class="flex min-h-[480px] flex-[1_1_380px] items-end justify-center bg-mustard pt-12">
+        <GedoganIllo label={p.illoAlt} />
+      </div>
+      <div class="flex min-w-0 flex-[999_1_480px] flex-col gap-6 p-[clamp(28px,4vw,48px)]">
+        <div class="flex flex-wrap gap-2">
+          <span class="chip bg-navy text-cream">{p.featured}</span>
           <span class="chip">{p.type}</span>
           <span class="chip">2026</span>
         </div>
-        <h3 class="serif project-title">Martonun</h3>
+        <h3 class="m-0 font-serif text-[clamp(56px,7vw,96px)] leading-[0.95] font-black tracking-[-0.02em]">Martonun</h3>
         <p class="eyebrow">{p.meaning}</p>
-        <p class="project-desc">{p.body}</p>
-        <ol class="steps">
+        <p class="m-0 text-lg leading-[1.65] text-ink-soft">{p.body}</p>
+        <ol class="mt-2 grid list-none grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-4 p-0">
           {p.steps.map((s, i) => (
-            <li><span class="serif step-n">{String(i + 1).padStart(2, '0')}</span><span class="step-t">{s}</span></li>
+            <li class="flex flex-col gap-1.5 rounded-2xl bg-cream p-[18px]">
+              <span class="font-serif text-[28px] font-black text-terracotta">{String(i + 1).padStart(2, '0')}</span>
+              <span class="font-bold">{s}</span>
+            </li>
           ))}
         </ol>
-        <dl class="facts">
-          <div><dt>{p.builtWith}</dt><dd>{p.builtWithValue}</dd></div>
-          <div><dt>{p.shownAt}</dt><dd>{p.shownAtValue}</dd></div>
+        <dl class="mt-2 grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-x-6 gap-y-4 border-t border-line pt-6">
+          <div>
+            <dt class="text-[13px] font-bold tracking-[0.08em] text-muted uppercase">{p.builtWith}</dt>
+            <dd class="mt-1 ml-0">{p.builtWithValue}</dd>
+          </div>
+          <div>
+            <dt class="text-[13px] font-bold tracking-[0.08em] text-muted uppercase">{p.shownAt}</dt>
+            <dd class="mt-1 ml-0">{p.shownAtValue}</dd>
+          </div>
         </dl>
-        <div class="actions">
+        <div class="mt-2 flex flex-wrap gap-3">
           <a href={ytUrl} class="btn btn-dark" rel="noopener">{p.watchFilm}</a>
           <a href="#" class="btn btn-outline">{p.caseStudy}</a>
         </div>
       </div>
     </article>
 
-    <article class="next">
-      <div class="next-text">
-        <p class="eyebrow mustard-light">{p.nextEyebrow}</p>
-        <h3 class="serif next-title">{p.nextTitle}</h3>
+    <article class="mt-8 mb-28 flex flex-wrap items-center justify-between gap-6 rounded-3xl bg-terracotta p-[clamp(28px,4vw,48px)] text-cream">
+      <div class="flex flex-[1_1_420px] flex-col gap-2">
+        <p class="eyebrow text-mustard-light">{p.nextEyebrow}</p>
+        <h3 class="m-0 font-serif text-[clamp(28px,4vw,40px)] leading-[1.1] font-extrabold">{p.nextTitle}</h3>
       </div>
       <a href={localePath(lang, 'about')} class="btn btn-cream">{p.meet}</a>
     </article>
   </section>
 </Base>
-
-<style>
-  .film { display: flex; background: var(--navy); color: var(--cream); }
-  .film-inner { flex: 1 1 auto; min-width: 0; max-width: 1144px; margin: 0 auto; padding: 56px 32px 64px; display: flex; flex-direction: column; gap: 24px; }
-  .film-top, .film-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; }
-  .film-top { align-items: baseline; }
-  .film-bottom { align-items: flex-end; }
-  .mustard { color: var(--mustard); }
-  .mustard-light { color: var(--mustard-light); }
-  .film-meta { margin: 0; color: #c9c4ba; font-size: 15px; }
-  .film-title { margin: 0; font-weight: 900; font-size: clamp(40px, 6vw, 72px); line-height: 1; letter-spacing: -.02em; }
-
-  .intro { display: flex; flex-wrap: wrap; gap: 32px 64px; padding-block: 96px 48px; }
-  .intro-label { flex: 1 1 240px; }
-  .intro-text { flex: 999 1 560px; margin: 0; font-weight: 700; font-size: clamp(24px, 3vw, 38px); line-height: 1.3; }
-
-  .heading-pad { padding: 48px 0 48px; }
-
-  .project { display: flex; flex-wrap: wrap; border-radius: 24px; overflow: hidden; background: #fff; border: 1px solid var(--line); }
-  .project-art { flex: 1 1 380px; min-height: 480px; background: var(--mustard); display: flex; align-items: flex-end; justify-content: center; padding-top: 48px; }
-  .project-body { flex: 999 1 480px; min-width: 0; padding: clamp(28px, 4vw, 48px); display: flex; flex-direction: column; gap: 24px; }
-  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
-  .project-title { margin: 0; font-weight: 900; font-size: clamp(56px, 7vw, 96px); line-height: .95; letter-spacing: -.02em; }
-  .project-desc { margin: 0; font-size: 18px; line-height: 1.65; color: var(--ink-soft); }
-  .steps { list-style: none; margin: 8px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; }
-  .steps li { padding: 18px; border-radius: 16px; background: var(--cream); display: flex; flex-direction: column; gap: 6px; }
-  .step-n { font-weight: 900; font-size: 28px; color: var(--terracotta); }
-  .step-t { font-weight: 700; }
-  .facts { margin: 8px 0 0; padding-top: 24px; border-top: 1px solid var(--line); display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px 24px; }
-  .facts dt { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-  .facts dd { margin: 4px 0 0; }
-  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
-
-  .next { margin: 32px 0 112px; border-radius: 24px; background: var(--terracotta); color: var(--cream); padding: clamp(28px, 4vw, 48px); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; }
-  .next-text { flex: 1 1 420px; display: flex; flex-direction: column; gap: 8px; }
-  .next-title { margin: 0; font-weight: 800; font-size: clamp(28px, 4vw, 40px); line-height: 1.1; }
-</style>

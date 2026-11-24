@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   // TODO: set to the real domain so canonical / hreflang URLs are absolute.
@@ -10,4 +11,5 @@ export default defineConfig({
     routing: { prefixDefaultLocale: false },
   },
   build: { inlineStylesheets: 'always' },
+  vite: { plugins: [tailwindcss()] },
 });
