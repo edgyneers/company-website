@@ -9,7 +9,7 @@ const en = {
     description:
       'Wastara Studio builds interactive experiences that let people touch, play with and carry home Indonesia’s cultural heritage.',
   },
-  nav: { projects: 'Projects', about: 'About', language: 'Language', main: 'Main' },
+  nav: { projects: 'Projects', about: 'About', language: 'Language', main: 'Main', menu: 'Menu' },
   tagline: { a: 'exploring', b: 'heritage', c: 'through', d: 'innovation' },
   footer: { contact: 'Contact' },
 
@@ -72,7 +72,7 @@ const id: typeof en = {
     description:
       'Wastara Studio membuat pengalaman interaktif yang mengajak orang menyentuh, memainkan, dan membawa pulang warisan budaya Indonesia.',
   },
-  nav: { projects: 'Proyek', about: 'Tentang', language: 'Bahasa', main: 'Utama' },
+  nav: { projects: 'Proyek', about: 'Tentang', language: 'Bahasa', main: 'Utama', menu: 'Menu' },
   tagline: { a: 'menjelajahi', b: 'warisan', c: 'lewat', d: 'inovasi' },
   footer: { contact: 'Kontak' },
 
