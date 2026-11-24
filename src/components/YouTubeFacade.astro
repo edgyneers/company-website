@@ -1,6 +1,9 @@
 ---
-// Lightweight YouTube player: shows our own poster and only loads the YouTube
-// iframe (≈1 MB of JS) once the visitor presses play.
+// Lightweight YouTube player with our own poster.
+// - Desktop: the YouTube iframe (~1 MB) only loads when the visitor clicks play.
+// - Phones: Safari/Chrome won't autoplay a player created after the tap, which forced a
+//   second tap. So on touch screens the real player loads (lazily) underneath the poster,
+//   the poster lets taps pass through, and it fades out once the video starts.
 import Tagline from './Tagline.astro';
 import Logo from './Logo.astro';
 import Skyline from './Skyline.astro';
@@ -10,7 +13,7 @@ interface Props { videoId: string; label: string; lang: Lang }
 const { videoId, label, lang } = Astro.props;
 ---
 <div class="yt relative aspect-video w-full overflow-hidden rounded-[20px] bg-terracotta [&_iframe]:absolute [&_iframe]:inset-0 [&_iframe]:size-full [&_iframe]:border-0" data-video-id={videoId}>
-  <button type="button" class="group absolute inset-0 block cursor-pointer appearance-none border-0 bg-transparent p-0 focus-visible:rounded-[20px] focus-visible:-outline-offset-6" aria-label={label}>
+  <button type="button" class="group absolute inset-0 z-10 block transition-opacity duration-300 cursor-pointer appearance-none border-0 bg-transparent p-0 focus-visible:rounded-[20px] focus-visible:-outline-offset-6" aria-label={label}>
     <!-- Skyline sits on the bottom edge; the sun runs past it and is clipped by the frame. -->
     <Skyline class="absolute bottom-0 left-1/2 h-auto w-[62%] -translate-x-1/2" />
     <!-- Logo + tagline in the band above the play button (hidden on small screens, where there's no room). -->
@@ -26,17 +29,60 @@ const { videoId, label, lang } = Astro.props;
 </div>
 
 <script>
+  const isTouch = matchMedia('(hover: none) and (pointer: coarse)').matches;
+
+  function makeIframe(src: string, title: string) {
+    const iframe = document.createElement('iframe');
+    iframe.src = src;
+    iframe.title = title;
+    iframe.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen';
+    iframe.allowFullscreen = true;
+    return iframe;
+  }
+
   document.querySelectorAll<HTMLElement>('.yt').forEach((el) => {
     const btn = el.querySelector('button');
-    btn?.addEventListener('click', () => {
-      const id = el.dataset.videoId;
-      const iframe = document.createElement('iframe');
-      iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
-      iframe.title = btn.getAttribute('aria-label') ?? 'YouTube video';
-      iframe.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen';
-      iframe.allowFullscreen = true;
-      el.replaceChildren(iframe);
-      iframe.focus();
-    }, { once: true });
+    const id = el.dataset.videoId;
+    if (!btn || !id) return;
+    const title = btn.getAttribute('aria-label') ?? 'YouTube video';
+
+    if (!isTouch) {
+      btn.addEventListener('click', () => {
+        const iframe = makeIframe(`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`, title);
+        el.replaceChildren(iframe);
+        iframe.focus();
+      }, { once: true });
+      return;
+    }
+
+    // Touch: real player underneath, poster on top but click-through.
+    // playsinline=1 → iPhone plays it in the page instead of jumping to fullscreen.
+    const params = new URLSearchParams({ rel: '0', playsinline: '1', enablejsapi: '1', origin: location.origin });
+    const iframe = makeIframe(`https://www.youtube-nocookie.com/embed/${id}?${params}`, title);
+    iframe.loading = 'lazy';
+    el.prepend(iframe);
+
+    btn.classList.add('pointer-events-none');
+    btn.tabIndex = -1;
+    btn.setAttribute('aria-hidden', 'true');
+
+    const hidePoster = () => btn.classList.add('opacity-0');
+
+    // The player reports its state over postMessage once we say we're listening.
+    iframe.addEventListener('load', () => {
+      iframe.contentWindow?.postMessage(JSON.stringify({ event: 'listening', id, channel: 'widget' }), '*');
+    });
+    window.addEventListener('message', (e) => {
+      if (e.source !== iframe.contentWindow || typeof e.data !== 'string') return;
+      try {
+        const msg = JSON.parse(e.data);
+        const state = msg.event === 'onStateChange' ? msg.info : msg.info?.playerState;
+        if (state === 1 || state === 3) hidePoster(); // 1 = playing, 3 = buffering
+      } catch { /* not a player message */ }
+    });
+    // Fallback: a tap moves focus into the iframe, which blurs this window.
+    window.addEventListener('blur', () => {
+      setTimeout(() => { if (document.activeElement === iframe) hidePoster(); });
+    });
   });
 </script>
