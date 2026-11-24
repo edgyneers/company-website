@@ -1,6 +1,6 @@
 # Wastara Studio — website
 
-Static Astro site in English (`/`) and Bahasa Indonesia (`/id/`). Pages: Projects (home) and About.
+Static Astro site in English (`/`) and Bahasa Indonesia (`/id/`). Pages: Works (home) and About.
 
 ```bash
 npm install
@@ -10,13 +10,13 @@ npm run build    # static files in dist/ — deploy to Vercel, Netlify, Cloudfla
 
 ## Where to edit
 
-| What | File |
-| --- | --- |
-| YouTube video ID, Instagram, email | `src/config.ts` |
-| All page copy, EN and ID side by side | `src/i18n/ui.ts` |
-| Domain (canonical + hreflang URLs) | `site` in `astro.config.mjs` |
-| Colours and fonts | `src/styles/global.css` |
-| Team members | the `team` list in `src/components/AboutPage.astro` |
+| What                                  | File                                                |
+| ------------------------------------- | --------------------------------------------------- |
+| YouTube video ID, Instagram, email    | `src/config.ts`                                     |
+| All page copy, EN and ID side by side | `src/i18n/ui.ts`                                    |
+| Domain (canonical + hreflang URLs)    | `site` in `astro.config.mjs`                        |
+| Colours and fonts                     | `src/styles/global.css`                             |
+| Team members                          | the `team` list in `src/components/AboutPage.astro` |
 
 Text in `[brackets]` is a placeholder.
 
