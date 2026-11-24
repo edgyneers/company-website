@@ -51,23 +51,24 @@ const memberLink =
 
   <section class="wrap py-28" aria-labelledby="team-title">
     <div class="rule-heading mb-12"><h2 id="team-title">{a.teamTitle}</h2></div>
-    <ul class="m-0 grid list-none grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-6 p-0">
+    <!-- Phone: photo left, info right. From sm up: photo on top. -->
+    <ul class="m-0 grid list-none grid-cols-1 gap-4 p-0 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
       {team.map((m) => (
-        <li class="flex flex-col overflow-hidden rounded-[20px] border border-line bg-white">
+        <li class="flex flex-row overflow-hidden rounded-[20px] border border-line bg-white sm:flex-col">
           <Image
             src={m.photo}
             alt={m.name}
-            widths={[360, 540, 720]}
-            sizes="(max-width: 700px) 90vw, (max-width: 1100px) 45vw, 360px"
+            widths={[256, 360, 540, 720]}
+            sizes="(max-width: 639px) 128px, (max-width: 1023px) 45vw, 360px"
             format="webp"
             quality={80}
             loading="lazy"
-            class="block aspect-[1080/1350] h-auto w-full bg-sand object-cover"
+            class="block aspect-[1080/1350] h-auto w-32 shrink-0 self-start bg-sand object-cover sm:w-full"
           />
-          <div class="flex flex-col gap-1 px-6 pt-5 pb-6">
-            <h3 class="m-0 text-xl font-bold">{m.name}</h3>
-            <p class="m-0 text-muted">{m.role[lang]}</p>
-            <div class="mt-3 flex flex-wrap gap-2">
+          <div class="flex min-w-0 flex-col justify-center gap-1 p-4 sm:justify-start sm:px-6 sm:pt-5 sm:pb-6">
+            <h3 class="m-0 text-lg leading-snug font-bold sm:text-xl">{m.name}</h3>
+            <p class="m-0 text-[15px] text-muted sm:text-base">{m.role[lang]}</p>
+            <div class="mt-2 flex flex-wrap gap-2 sm:mt-3">
               <a href={m.linkedin} rel="noopener" aria-label={`${m.name} — LinkedIn`} class={memberLink}>
                 <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.5h4V21H3V9.5Zm7 0h3.8v1.6h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.2c0-1.24-.02-2.84-1.73-2.84-1.73 0-2 1.35-2 2.75V21h-4V9.5Z" /></svg>
                 LinkedIn
