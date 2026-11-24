@@ -13,14 +13,18 @@ interface Props { videoId: string; label: string; lang: Lang }
 const { videoId, label, lang } = Astro.props;
 ---
 <div class="yt relative aspect-video w-full overflow-hidden rounded-[20px] bg-terracotta [&_iframe]:absolute [&_iframe]:inset-0 [&_iframe]:size-full [&_iframe]:border-0" data-video-id={videoId}>
-  <button type="button" class="group absolute inset-0 z-10 block transition-opacity duration-300 cursor-pointer appearance-none border-0 bg-transparent p-0 focus-visible:rounded-[20px] focus-visible:-outline-offset-6" aria-label={label}>
+
+  <button type="button" class="group absolute inset-0 z-10 block transition-opacity duration-300 cursor-pointer appearance-none border-0 bg-terracotta p-0 focus-visible:rounded-[20px] focus-visible:-outline-offset-6" aria-label={label}>
+
     <!-- Skyline sits on the bottom edge; the sun runs past it and is clipped by the frame. -->
     <Skyline class="absolute bottom-0 left-1/2 h-auto w-[62%] -translate-x-1/2" />
+
     <!-- Logo + tagline in the band above the play button (hidden on small screens, where there's no room). -->
     <span class="absolute inset-x-0 top-0 bottom-[calc(50%+3.5rem)] hidden flex-col items-center justify-center gap-3 px-4 text-center text-cream sm:flex lg:gap-5">
       <Logo height={72} class="h-10 w-auto text-cream lg:h-[72px]" />
       <Tagline lang={lang} />
     </span>
+
     <!-- Play button, dead centre of the thumbnail. -->
     <span class="absolute top-1/2 left-1/2 flex size-16 shrink-0 -translate-1/2 items-center justify-center rounded-full bg-cream shadow-[0_10px_30px_rgba(14,20,36,.35)] transition-transform duration-200 group-hover:scale-105 sm:size-24">
       <svg aria-hidden="true" width="34" height="34" viewBox="0 0 24 24" class="ml-1 size-7 sm:size-[34px]"><path d="M7 4.5 L20 12 L7 19.5Z" fill="#A2513A" /></svg>

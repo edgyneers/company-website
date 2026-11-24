@@ -16,16 +16,21 @@ const ytUrl = `https://www.youtube.com/watch?v=${site.youtubeId}`;
   <!-- Film -->
   <section class="flex bg-navy text-cream" aria-labelledby="film-title">
     <DiamondStrip id="dm-film" orientation="vertical" size={56} />
+
     <div class="mx-auto flex max-w-[1144px] min-w-0 flex-auto flex-col gap-6 px-8 pt-14 pb-16">
+
       <div class="flex flex-wrap items-baseline justify-between gap-4">
         <p class="eyebrow text-mustard">{p.filmEyebrow}</p>
         <p class="m-0 text-[15px] text-stone">{p.filmMeta}</p>
       </div>
+
       <YouTubeFacade videoId={site.youtubeId} label={p.filmPlay} lang={lang} />
+
       <div class="flex flex-wrap items-end justify-between gap-4">
         <h1 id="film-title" class="m-0 font-serif text-[clamp(40px,6vw,72px)] leading-none font-black tracking-[-0.02em]">{p.filmTitle[0]}<br />{p.filmTitle[1]}</h1>
         <a href={ytUrl} class="btn btn-mustard" rel="noopener">{p.watchYoutube}</a>
       </div>
+
     </div>
   </section>
 
