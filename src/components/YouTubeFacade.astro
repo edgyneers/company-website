@@ -3,6 +3,7 @@
 // iframe (≈1 MB of JS) once the visitor presses play.
 import Tagline from './Tagline.astro';
 import Logo from './Logo.astro';
+import Skyline from './Skyline.astro';
 import type { Lang } from '../i18n/ui';
 
 interface Props { videoId: string; label: string; lang: Lang }
@@ -10,17 +11,7 @@ const { videoId, label, lang } = Astro.props;
 ---
 <div class="yt" data-video-id={videoId}>
   <button type="button" class="yt-poster" aria-label={label}>
-    <svg aria-hidden="true" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" class="yt-art">
-      <circle cx="800" cy="720" r="230" fill="#DFA942" />
-      <path d="M470 900 V820 H500 V790 H530 V760 H560 Q590 690 640 680 V640 H648 V680 Q700 690 728 760 H758 V790 H788 V820 H818 V900Z" fill="#0E1424" />
-      <path d="M760 900 V760 L720 640 Q760 690 800 700 Q860 640 880 600 Q900 640 960 700 Q1000 690 1040 640 L1000 760 V900Z" fill="#0E1424" />
-      <rect x="830" y="800" width="20" height="26" fill="#DFA942" />
-      <rect x="870" y="800" width="20" height="26" fill="#DFA942" />
-      <rect x="910" y="800" width="20" height="26" fill="#DFA942" />
-      <path d="M1040 860 H1300 L1270 900 H1070Z" fill="#0E1424" />
-      <path d="M1150 850 V650 L1070 850Z M1160 850 V620 L1270 850Z M1250 850 V690 L1300 850Z" fill="#0E1424" />
-      <rect x="420" y="890" width="920" height="10" fill="#0E1424" />
-    </svg>
+    <Skyline class="yt-art" />
     <span class="yt-center">
       <Logo height={72} class="yt-logo" />
       <span class="yt-play">
@@ -52,8 +43,9 @@ const { videoId, label, lang } = Astro.props;
   .yt :global(iframe) { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
   .yt-poster { all: unset; cursor: pointer; position: absolute; inset: 0; display: block; }
   .yt-poster:focus-visible { outline: 3px solid var(--mustard); outline-offset: -6px; border-radius: 20px; }
-  .yt-art { position: absolute; inset: 0; width: 100%; height: 100%; }
-  .yt-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; padding: 0 16px 12%; text-align: center; color: var(--cream); }
+  /* Skyline sits on the bottom edge; the sun runs past it and is clipped by the frame. */
+  .yt-poster :global(.yt-art) { position: absolute; left: 50%; bottom: 0; width: 62%; height: auto; transform: translateX(-50%); }
+  .yt-center { position: absolute; inset: 0 0 auto; height: 58%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; padding: 0 16px; text-align: center; color: var(--cream); }
   .yt-play { width: 96px; height: 96px; border-radius: 50%; background: var(--cream); display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(14,20,36,.35); transition: transform .2s; }
   .yt-poster:hover .yt-play { transform: scale(1.06); }
   .yt-center :global(.yt-logo) { color: var(--cream); }
