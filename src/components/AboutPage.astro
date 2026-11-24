@@ -55,16 +55,19 @@ const memberLink =
     <ul class="m-0 grid list-none grid-cols-1 gap-4 p-0 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
       {team.map((m) => (
         <li class="flex flex-row overflow-hidden rounded-[20px] border border-line bg-white sm:flex-col">
-          <Image
-            src={m.photo}
-            alt={m.name}
-            widths={[256, 360, 540, 720]}
-            sizes="(max-width: 639px) 128px, (max-width: 1023px) 45vw, 360px"
-            format="webp"
-            quality={80}
-            loading="lazy"
-            class="block aspect-[1080/1350] h-auto w-32 shrink-0 self-start bg-sand object-cover sm:w-full"
-          />
+          <!-- Phone: photo column stretches to the card's height (cropped to fit). From sm up: natural 4:5. -->
+          <div class="relative min-h-40 w-32 shrink-0 bg-sand sm:min-h-0 sm:w-full">
+            <Image
+              src={m.photo}
+              alt={m.name}
+              widths={[256, 360, 540, 720]}
+              sizes="(max-width: 639px) 128px, (max-width: 1023px) 45vw, 360px"
+              format="webp"
+              quality={80}
+              loading="lazy"
+              class="absolute inset-0 size-full object-cover object-top sm:static sm:aspect-[1080/1350] sm:h-auto"
+            />
+          </div>
           <div class="flex min-w-0 flex-col justify-center gap-1 p-4 sm:justify-start sm:px-6 sm:pt-5 sm:pb-6">
             <h3 class="m-0 text-lg leading-snug font-bold sm:text-xl">{m.name}</h3>
             <p class="m-0 text-[15px] text-muted sm:text-base">{m.role[lang]}</p>
