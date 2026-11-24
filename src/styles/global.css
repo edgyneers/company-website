@@ -1,0 +1,66 @@
+@import '@fontsource-variable/playfair-display';
+@import '@fontsource-variable/plus-jakarta-sans';
+
+:root {
+  --navy: #0e1424;
+  --terracotta: #a2513a;
+  --terracotta-dark: #8e4431;
+  --mustard: #dfa942;
+  --mustard-light: #f2c46a;
+  --cream: #f3efe6;
+  --sand: #e9e2d4;
+  --line: #e2dacb;
+  --ink-soft: #2a2f3d;
+  --muted: #5b5548;
+  --serif: 'Playfair Display Variable', Georgia, serif;
+  --sans: 'Plus Jakarta Sans Variable', system-ui, sans-serif;
+  --wrap: 1200px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--navy);
+  font-family: var(--sans);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+main { flex: 1 0 auto; }
+img, svg { display: block; max-width: 100%; }
+a { color: var(--navy); }
+a:hover { color: var(--terracotta); }
+:focus-visible { outline: 3px solid var(--mustard); outline-offset: 3px; }
+
+.wrap { max-width: var(--wrap); margin: 0 auto; padding-inline: 32px; width: 100%; }
+.serif { font-family: var(--serif); }
+.eyebrow { margin: 0; font-size: 14px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--terracotta); }
+
+/* Pill buttons */
+.btn {
+  display: inline-flex; align-items: center; min-height: 48px; padding: 0 22px;
+  border-radius: 999px; text-decoration: none; font-weight: 700; font-size: 15px;
+  border: 1.5px solid transparent;
+}
+.btn-dark { background: var(--navy); color: var(--cream); }
+.btn-dark:hover { color: var(--mustard-light); }
+.btn-outline { border-color: var(--navy); }
+.btn-mustard { background: var(--mustard); color: var(--navy); }
+.btn-mustard:hover { color: var(--navy); background: var(--mustard-light); }
+.btn-cream { background: var(--cream); color: var(--navy); }
+
+/* Big headline with trailing rule, like the "Team" post */
+.rule-heading { display: flex; align-items: flex-end; gap: 24px; }
+.rule-heading h1, .rule-heading h2 {
+  margin: 0; font-family: var(--serif); font-weight: 900;
+  font-size: clamp(64px, 10vw, 136px); line-height: .9; letter-spacing: -.03em;
+}
+.rule-heading::after { content: ''; flex: 1 1 auto; height: 1.5px; background: var(--navy); margin-bottom: 22px; }
+
+.chip { padding: 6px 12px; border-radius: 999px; background: var(--cream); font-size: 13px; font-weight: 600; }
+.chip-dark { background: var(--navy); color: var(--cream); }
+
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }

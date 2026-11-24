@@ -1,0 +1,13 @@
+// @ts-check
+import { defineConfig } from 'astro/config';
+
+export default defineConfig({
+  // TODO: set to the real domain so canonical / hreflang URLs are absolute.
+  site: 'https://example.com',
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'id'],
+    routing: { prefixDefaultLocale: false },
+  },
+  build: { inlineStylesheets: 'always' },
+});

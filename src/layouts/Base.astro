@@ -1,0 +1,105 @@
+---
+import '../styles/global.css';
+import DiamondStrip from '../components/DiamondStrip.astro';
+import Logo from '../components/Logo.astro';
+import { languages, localePath, t, type Lang } from '../i18n/ui';
+import { site } from '../config';
+
+interface Props {
+  lang: Lang;
+  page: '' | 'about';
+  title: string;
+}
+const { lang, page, title } = Astro.props;
+const c = t(lang);
+const langs = Object.keys(languages) as Lang[];
+const canonical = new URL(localePath(lang, page), Astro.site);
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={c.meta.description} />
+    <link rel="canonical" href={canonical} />
+    {langs.map((l) => <link rel="alternate" hreflang={l} href={new URL(localePath(l, page), Astro.site)} />)}
+    <link rel="alternate" hreflang="x-default" href={new URL(localePath('en', page), Astro.site)} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#0E1424" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={c.meta.description} />
+    <meta property="og:locale" content={lang === 'id' ? 'id_ID' : 'en_US'} />
+    <meta property="og:image" content={new URL('/og-image.jpg', Astro.site)} />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav aria-label={c.nav.main} class="wrap nav">
+        <a href={localePath(lang, '')} class="brand">
+          <Logo height={30} class="brand-mark" />
+          <span class="brand-name">{site.name}</span>
+        </a>
+        <div class="nav-links">
+          <a href={localePath(lang, '')} class="nav-link" aria-current={page === '' ? 'page' : undefined}>{c.nav.projects}</a>
+          <a href={localePath(lang, 'about')} class="nav-link" aria-current={page === 'about' ? 'page' : undefined}>{c.nav.about}</a>
+          <a href={site.instagram} class="nav-link nav-outline" rel="noopener">Instagram ↗</a>
+          <div class="lang" role="group" aria-label={c.nav.language}>
+            {langs.map((l) => (
+              <a
+                href={localePath(l, page)}
+                hreflang={l}
+                lang={l}
+                aria-current={l === lang ? 'true' : undefined}
+              >{languages[l]}</a>
+            ))}
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <DiamondStrip id="dm-footer" />
+      <div class="wrap footer-inner">
+        <div class="footer-brand">
+          <Logo height={44} />
+          <span class="serif footer-name">{site.name}</span>
+          <span class="footer-tag">{c.tagline.a} {c.tagline.b} {c.tagline.c} {c.tagline.d}</span>
+        </div>
+        <div class="footer-links">
+          <a href={localePath(lang, '')}>{c.nav.projects}</a>
+          <a href={localePath(lang, 'about')}>{c.nav.about}</a>
+          <a href={site.instagram} rel="noopener">{site.instagramHandle}</a>
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .site-header { border-bottom: 1px solid #d9d1c2; background: var(--cream); }
+  .nav { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding-block: 20px; }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--navy); }
+  .brand :global(.brand-mark) { color: var(--navy); }
+  .brand-name { font-family: var(--serif); font-weight: 800; font-size: 22px; letter-spacing: -.01em; }
+  .nav-links { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .nav-link { display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 999px; text-decoration: none; font-weight: 600; font-size: 15px; border: 1.5px solid transparent; }
+  .nav-link[aria-current='page'] { background: var(--navy); color: var(--cream); }
+  .nav-outline { border-color: var(--navy); }
+  .lang { display: flex; padding: 4px; border-radius: 999px; background: var(--sand); margin-left: 8px; }
+  .lang a { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 40px; padding: 0 14px; border-radius: 999px; text-decoration: none; font-weight: 700; font-size: 14px; }
+  .lang a[aria-current='true'] { background: var(--terracotta); color: var(--cream); }
+
+  .site-footer { background: var(--navy); color: var(--cream); }
+  .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 32px; padding-block: 56px; }
+  .footer-brand { display: flex; flex-direction: column; gap: 10px; }
+  .footer-name { font-weight: 800; font-size: 28px; }
+  .footer-tag { color: #c9c4ba; }
+  .footer-links { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 28px; font-size: 15px; }
+  .footer-links a { color: var(--cream); }
+  .footer-links a:hover { color: var(--mustard-light); }
+</style>
