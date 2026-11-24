@@ -1,6 +1,6 @@
 # Wastara Studio — website
 
-Static Astro site in English (`/`) and Bahasa Indonesia (`/id/`). Pages: Works (home) and About.
+Static Astro site in Bahasa Indonesia (`/`, default) and English (`/en/`). Pages: Works (home) and About.
 
 ```bash
 npm install

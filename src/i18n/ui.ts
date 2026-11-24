@@ -1,5 +1,5 @@
 // All page copy, per language. Keep the keys identical in both.
-export const languages = { en: "EN", id: "ID" } as const;
+export const languages = { id: "ID", en: "EN" } as const;
 export type Lang = keyof typeof languages;
 
 const en = {
@@ -175,6 +175,6 @@ export function t(lang: Lang) {
 
 /** Path of the same page in the given language. */
 export function localePath(lang: Lang, page: "" | "about") {
-  const prefix = lang === "en" ? "" : `/${lang}`;
+  const prefix = lang === "id" ? "" : `/${lang}`;
   return `${prefix}/${page}${page ? "/" : ""}`.replace(/\/+/g, "/") || "/";
 }
