@@ -1,5 +1,6 @@
 @import "@fontsource-variable/playfair-display";
 @import "@fontsource-variable/plus-jakarta-sans";
+@import "@fontsource/pinyon-script";
 @import "tailwindcss";
 
 /* Brand tokens → Tailwind utilities: bg-navy, text-terracotta, font-serif, max-w-wrap, … */
@@ -16,14 +17,18 @@
   --color-ink-soft: #2a2f3d;
   --color-muted: #5b5548;
   --color-stone: #c9c4ba;
+  --color-maroon: #561e1c; /* "Perjalanan Martonun" poster */
 
   --font-serif: "Playfair Display Variable", Georgia, serif;
   --font-sans: "Plus Jakarta Sans Variable", system-ui, sans-serif;
+  --font-script: "Pinyon Script", cursive;
 
   --container-wrap: 1200px;
 }
 
 @layer base {
+  /* Pages with a full-bleed maroon body (Perjalanan Martonun) fill down to the footer. */
+  main:has(> .bg-maroon) { @apply bg-maroon; }
   body {
     @apply flex min-h-screen flex-col bg-cream font-sans leading-normal text-navy;
   }

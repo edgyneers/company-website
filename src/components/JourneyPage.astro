@@ -1,0 +1,112 @@
+---
+// "Perjalanan Martonun": the project timeline, rebuilt from the playtest poster.
+// Desktop: four columns on a stepped line, like the poster. Phones: one vertical timeline.
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import { journey } from '../data/journey';
+import { t, localePath, type Lang } from '../i18n/ui';
+import { site } from '../config';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const c = t(lang);
+const j = c.journey;
+const ytUrl = `https://www.youtube.com/watch?v=${site.youtubeId}`;
+
+// Vertical offset of each milestone on desktop (px), matching the poster's up-down line.
+const offsets = [0, 120, 0, 80];
+const pill = 20; // half a date pill's height: where the line meets it
+
+// "**bold**" → [{ text, bold }] so quotes can keep the poster's emphasis.
+const parts = (s: string) => s.split('**').map((text, i) => ({ text, bold: i % 2 === 1 }));
+
+// Never ask Astro for a bigger size than the photo itself.
+const widthsFor = (w: number) => {
+  const ws = [400, 800].filter((x) => x < w);
+  return [...ws, w];
+};
+---
+<Base lang={lang} page="works/martonun" title={c.meta.journeyTitle}>
+  <div class="bg-maroon text-cream">
+    <!-- Title -->
+    <section class="wrap pt-10 pb-14 md:pt-14 md:pb-20">
+      <a href={localePath(lang, '')} class="inline-flex min-h-11 items-center text-[15px] font-semibold text-cream/80 no-underline hover:text-mustard-light">{j.back}</a>
+      <h1 class="mt-6 mb-0 flex flex-wrap items-baseline gap-x-5 font-serif text-[clamp(44px,7vw,88px)] leading-none font-bold">
+        <span>{j.titleA}</span>
+        <span class="relative font-script text-[1.35em] leading-[1.1] font-normal">
+          Martonun
+          <svg aria-hidden="true" viewBox="0 0 24 24" class="absolute -top-2 -right-9 size-6 md:-right-11 md:size-8"><path fill="currentColor" d="M12 0C12.9 7.6 16.4 11.1 24 12C16.4 12.9 12.9 16.4 12 24C11.1 16.4 7.6 12.9 0 12C7.6 11.1 11.1 7.6 12 0Z" /></svg>
+        </span>
+      </h1>
+      <p class="mt-6 mb-0 max-w-[640px] text-lg leading-relaxed text-cream/85">{j.lead}</p>
+    </section>
+
+    <!-- Timeline -->
+    <section class="wrap relative pb-24" aria-label={j.titleA + ' Martonun'}>
+      <!-- Desktop: the stepped line from the poster, drawn behind the date pills. -->
+      <svg aria-hidden="true" viewBox="0 0 1000 160" preserveAspectRatio="none" class="pointer-events-none absolute inset-x-8 top-0 hidden h-[160px] lg:block" style="width: calc(100% - 4rem)">
+        <path
+          d={`M125 ${offsets[0] + pill} H232 Q250 ${offsets[0] + pill} 250 ${offsets[0] + pill + 18} V${offsets[1] + pill - 18} Q250 ${offsets[1] + pill} 268 ${offsets[1] + pill} H482 Q500 ${offsets[1] + pill} 500 ${offsets[1] + pill - 18} V${offsets[2] + pill + 18} Q500 ${offsets[2] + pill} 518 ${offsets[2] + pill} H732 Q750 ${offsets[2] + pill} 750 ${offsets[2] + pill + 18} V${offsets[3] + pill - 18} Q750 ${offsets[3] + pill} 768 ${offsets[3] + pill} H875`}
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          vector-effect="non-scaling-stroke"
+        />
+      </svg>
+
+      <ol class="relative m-0 ml-3 grid list-none gap-14 border-l-2 border-cream/40 p-0 pl-8 lg:ml-0 lg:grid-cols-4 lg:gap-8 lg:border-l-0 lg:pl-0">
+        {journey.map((m, i) => (
+          <li class="relative flex flex-col gap-5 lg:pt-[var(--o)]" style={`--o:${offsets[i]}px`}>
+            <!-- Phone: sparkle on the vertical line -->
+            <svg aria-hidden="true" viewBox="0 0 24 24" class="absolute top-2 -left-[45px] size-6 text-cream lg:hidden"><path fill="currentColor" d="M12 0C12.9 7.6 16.4 11.1 24 12C16.4 12.9 12.9 16.4 12 24C11.1 16.4 7.6 12.9 0 12C7.6 11.1 11.1 7.6 12 0Z" /></svg>
+
+            <div class="flex flex-col items-start gap-3 lg:items-center lg:text-center">
+              <span class="relative inline-flex h-10 items-center rounded-md bg-[#3a1210] px-3 text-base font-bold">
+                {m.date[lang]}
+                <svg aria-hidden="true" viewBox="0 0 24 24" class="absolute -top-3 -right-3 hidden size-6 lg:block"><path fill="currentColor" d="M12 0C12.9 7.6 16.4 11.1 24 12C16.4 12.9 12.9 16.4 12 24C11.1 16.4 7.6 12.9 0 12C7.6 11.1 11.1 7.6 12 0Z" /></svg>
+              </span>
+              <h2 class="m-0 font-serif text-[26px] leading-tight font-bold">{m.title[lang]}</h2>
+            </div>
+
+            <!-- Photos share one row height: each one's flex-grow is its aspect ratio. -->
+            <div class="flex gap-3">
+              {m.photos.map((p) => (
+                <div style={`flex: ${p.src.width / p.src.height} 1 0`} class="min-w-0">
+                  <Image
+                    src={p.src}
+                    alt={p.alt[lang]}
+                    widths={widthsFor(p.src.width)}
+                    sizes="(max-width: 1023px) 90vw, 280px"
+                    format="webp"
+                    quality={85}
+                    loading="lazy"
+                    class="block h-auto w-full rounded-xl"
+                  />
+                </div>
+              ))}
+            </div>
+
+            {m.quotes.map((q) => (
+              <figure class="m-0 flex flex-col gap-3">
+                <blockquote class="m-0 text-[15px] leading-[1.7] whitespace-pre-line text-cream/95">
+                  “{parts(q.text[lang]).map((p) => (p.bold ? <strong>{p.text}</strong> : p.text))}”
+                </blockquote>
+                <figcaption class="flex flex-col">
+                  <span class="font-serif text-lg font-semibold">— {q.name}</span>
+                  {q.role && <span class="text-sm text-cream/75 italic">{q.role[lang]}</span>}
+                </figcaption>
+              </figure>
+            ))}
+          </li>
+        ))}
+      </ol>
+
+      {j.translatedNote && <p class="mt-14 mb-0 text-sm text-cream/75 italic">{j.translatedNote}</p>}
+
+      <div class="mt-14 flex flex-wrap gap-3">
+        <a href={ytUrl} class="btn btn-mustard" rel="noopener">{c.works.watchFilm}</a>
+        <a href={localePath(lang, '')} class="btn border-cream text-cream hover:text-mustard-light">{j.back}</a>
+      </div>
+    </section>
+  </div>
+</Base>

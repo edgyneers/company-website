@@ -4,6 +4,7 @@ export type Lang = keyof typeof languages;
 
 const en = {
   meta: {
+    journeyTitle: "The Martonun Journey — Wastara Studio",
     worksTitle: "Wastara Studio — Works",
     aboutTitle: "About — Wastara Studio",
     description:
@@ -44,12 +45,19 @@ const en = {
     shownAt: "Shown at",
     shownAtValue: "Museum Tekstil Jakarta (Jan - Mar 2027)",
     watchFilm: "Watch the video ↗",
-    caseStudy: "Read the case study",
+    caseStudy: "See the journey →",
     illoAlt:
       "The Martonun console at the exhibition: a controller shaped like a traditional loom, with a movable slider, and the iPad weaving guide behind it",
     nextEyebrow: "Next on the loom",
     nextTitle: "Next project — coming soon",
     meet: "Meet the studio →",
+  },
+
+  journey: {
+    titleA: "The journey of",
+    lead: "From our first meeting to the final concept playtest at Museum Tekstil: how Martonun took shape with the museum, its curators and the weavers.",
+    back: "← Back to Works",
+    translatedNote: "Quotes translated from Indonesian.",
   },
 
   about: {
@@ -90,6 +98,7 @@ const en = {
 
 const id: typeof en = {
   meta: {
+    journeyTitle: "Perjalanan Martonun — Wastara Studio",
     worksTitle: "Wastara Studio — Karya",
     aboutTitle: "Tentang — Wastara Studio",
     description:
@@ -131,12 +140,19 @@ const id: typeof en = {
     shownAt: "Dipamerkan di",
     shownAtValue: "Museum Tekstil Jakarta (Jan - Mar 2027)",
     watchFilm: "Tonton video ↗",
-    caseStudy: "Baca studi kasus",
+    caseStudy: "Lihat perjalanannya →",
     illoAlt:
       "Konsol Martonun di pameran: pengendali berbentuk alat tenun tradisional dengan slider yang bisa digeser, dan iPad pemandu menenun di belakangnya",
     nextEyebrow: "Berikutnya di alat tenun",
     nextTitle: "Karya berikutnya — segera hadir",
     meet: "Kenali studio kami →",
+  },
+
+  journey: {
+    titleA: "Perjalanan",
+    lead: "Dari pertemuan pertama hingga uji coba konsep akhir di Museum Tekstil: bagaimana Martonun terbentuk bersama museum, kurator, dan para penenun.",
+    back: "← Kembali ke Karya",
+    translatedNote: "",
   },
 
   about: {
@@ -181,7 +197,9 @@ export function t(lang: Lang) {
 }
 
 /** Path of the same page in the given language. */
-export function localePath(lang: Lang, page: "" | "about") {
+export type PageKey = "" | "about" | "works/martonun";
+
+export function localePath(lang: Lang, page: PageKey) {
   const prefix = lang === "id" ? "" : `/${lang}`;
   return `${prefix}/${page}${page ? "/" : ""}`.replace(/\/+/g, "/") || "/";
 }
