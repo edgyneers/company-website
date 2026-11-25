@@ -3,8 +3,7 @@ import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  // TODO: set to the real domain so canonical / hreflang URLs are absolute.
-  site: "https://example.com",
+  site: "https://www.wastarastudio.com",
   i18n: {
     defaultLocale: "id",
     locales: ["id", "en"],
