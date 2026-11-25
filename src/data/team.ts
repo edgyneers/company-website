@@ -40,6 +40,7 @@ export const team: Member[] = [
     role: { en: "IoT Developer", id: "IoT Developer" },
     photo: fathan,
     linkedin: "https://www.linkedin.com/in/fathanadhitama/",
+    website: "https://fathanadhitama.dev/",
   },
   {
     name: "Risanto Mulyo",

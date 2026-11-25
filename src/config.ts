@@ -4,5 +4,5 @@ export const site = {
   youtubeId: "7UY2dCWXmtQ", // e.g. the part after watch?v=
   instagram: "https://www.instagram.com/wastarastudio",
   instagramHandle: "wastarastudio",
-  email: "hello@example.com",
+  email: "wastarastudio@gmail.com",
 };

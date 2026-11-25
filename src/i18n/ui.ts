@@ -22,7 +22,7 @@ const en = {
   works: {
     filmEyebrow: "Featured work",
     filmMeta: "Martonun · 2026",
-    filmPlay: "Play the Martonun film",
+    filmPlay: "Play the Martonun video",
     filmTitle: ["Weaving an ulos,", "one visitor at a time."],
     watchYoutube: "Watch on YouTube ↗",
     introLabel: "Wastara Studio",
@@ -40,10 +40,10 @@ const en = {
     ],
     builtWith: "Built with",
     builtWithValue:
-      "iPadOS app · ESP32 console over BLE · Projection on fabric",
+      "iPadOS app · ESP32 console over WiFi · Projection on fabric",
     shownAt: "Shown at",
-    shownAtValue: "[Museum / venue]",
-    watchFilm: "Watch the film ↗",
+    shownAtValue: "Museum Tekstil Jakarta",
+    watchFilm: "Watch the video ↗",
     caseStudy: "Read the case study",
     illoAlt:
       "Illustration of a gedogan loom shaped like a gunungan, with a tree of threads",
@@ -59,7 +59,7 @@ const en = {
     storyTitle: "Born at the Apple Developer Academy @ BINUS.",
     story: [
       "Wastara Studio started as a team in the Academy’s final challenge: 49 days to build something within the Apple ecosystem. We chose to bring a museum visit to life, and built Martonun — an installation where visitors weave their own ulos on a gedogan loom.",
-      "[The meaning behind the name “Wastara”, and where the studio is heading next.]",
+      // "[The meaning behind the name “Wastara”, and where the studio is heading next.]",
     ],
     howTitle: "How we work",
     how: [
@@ -110,7 +110,7 @@ const id: typeof en = {
   works: {
     filmEyebrow: "Karya terbaru",
     filmMeta: "Martonun · 2026",
-    filmPlay: "Putar film Martonun",
+    filmPlay: "Putar video Martonun",
     filmTitle: ["Menenun ulos,", "dari tangan ke tangan."],
     watchYoutube: "Tonton di YouTube ↗",
     introLabel: "Wastara Studio",
@@ -123,15 +123,15 @@ const id: typeof en = {
     body: "Instalasi museum tempat pengunjung menenun ulos mereka sendiri — kain adat Batak — di atas gedogan, alat tenun gendong tradisional. Sebuah konsol fisik menggantikan alat tenunnya: angkat handle, geser turak, dan iPad memandu setiap langkah. Setiap kain yang selesai menyambung ke bentangan ulos yang diproyeksikan ke kain putih, dari satu pengunjung ke pengunjung berikutnya.",
     steps: ["Pilih warna", "Tenun di konsol", "Lihat ulosmu di kain"],
     builtWith: "Dibuat dengan",
-    builtWithValue: "Aplikasi iPadOS · Konsol ESP32 via BLE · Karyasi di kain",
+    builtWithValue: "Aplikasi iPadOS · Konsol ESP32 via Wifi · Projection Mapping di kain",
     shownAt: "Dipamerkan di",
-    shownAtValue: "[Museum / tempat]",
-    watchFilm: "Tonton filmnya ↗",
+    shownAtValue: "Museum Tekstil Jakarta",
+    watchFilm: "Tonton video ↗",
     caseStudy: "Baca studi kasus",
     illoAlt:
       "Ilustrasi alat tenun gedogan berbentuk gunungan dengan pohon benang",
     nextEyebrow: "Berikutnya di alat tenun",
-    nextTitle: "[Karya berikutnya — segera hadir]",
+    nextTitle: "Karya berikutnya — segera hadir",
     meet: "Kenali studio kami →",
   },
 
@@ -142,7 +142,7 @@ const id: typeof en = {
     storyTitle: "Lahir di Apple Developer Academy @ BINUS.",
     story: [
       "Wastara Studio bermula sebagai tim di final challenge Academy: 49 hari untuk membuat sesuatu di ekosistem Apple. Kami memilih menghidupkan kunjungan ke museum, dan membuat Martonun — instalasi tempat pengunjung menenun ulos mereka sendiri di alat tenun gedogan.",
-      "[Makna di balik nama “Wastara”, dan ke mana studio ini melangkah berikutnya.]",
+      // "[Makna di balik nama “Wastara”, dan ke mana studio ini melangkah berikutnya.]",
     ],
     howTitle: "Cara kami bekerja",
     how: [
