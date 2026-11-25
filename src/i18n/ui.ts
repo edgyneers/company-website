@@ -36,8 +36,11 @@ const en = {
     body: "A museum installation where visitors weave their own ulos — the Batak ceremonial cloth — on a gedogan (the traditional loom). A physical console stands in for the loom: lift the handle, move the slider, and an iPad guides every pass. Each finished cloth joins the ulos projected onto white fabric, from one visitor to the next.",
     steps: ["Start the game", "Move the console", "See your ulos on the cloth"],
     builtWith: "Built with",
-    builtWithValue:
-      "iPadOS app · ESP32 console over Wi-Fi · Projection mapping on fabric",
+    builtWithValue: [
+      "iPadOS app",
+      "ESP32 console over Wi-Fi",
+      "Projection mapping on fabric",
+    ],
     shownAt: "Shown at",
     shownAtValue: "Museum Tekstil Jakarta (soon, from January 2027)",
     watchFilm: "Watch the video ↗",
@@ -85,9 +88,9 @@ const en = {
     ],
     teamTitle: "Team",
     website: "Website",
-    ctaTitle: "Have a collection with a story to tell?",
+    ctaTitle: "Have a story to tell?",
     ctaBody:
-      "We’d love to hear from museums, galleries and cultural communities.",
+      "We’d love to hear from museums, galleries, communities and culture lovers.",
     ctaButton: "Get in touch →",
   },
 };
@@ -131,8 +134,11 @@ const id: typeof en = {
     body: "Instalasi museum tempat pengunjung menenun ulos — kain adat Batak — mereka sendiri di atas gedogan (alat tenun tradisional). Sebuah konsol fisik menggantikan alat tenunnya: angkat handle, geser slider, dan iPad memandu setiap langkah. Setiap kain yang selesai menyambung ke ulos yang diproyeksikan ke kain putih, dari satu pengunjung ke pengunjung berikutnya.",
     steps: ["Mulai permainan", "Gerakkan konsol", "Lihat ulosmu di kain"],
     builtWith: "Dibuat dengan",
-    builtWithValue:
-      "Aplikasi iPadOS · Konsol ESP32 via Wi-Fi · Projection mapping di kain",
+    builtWithValue: [
+      "Aplikasi iPadOS",
+      "Konsol ESP32 via Wi-Fi",
+      "Projection mapping di kain",
+    ],
     shownAt: "Dipamerkan di",
     shownAtValue: "Museum Tekstil Jakarta — segera, mulai Januari 2027",
     watchFilm: "Tonton video ↗",
@@ -180,8 +186,9 @@ const id: typeof en = {
     ],
     teamTitle: "Tim",
     website: "Situs web",
-    ctaTitle: "Punya koleksi dengan cerita untuk dibagikan?",
-    ctaBody: "Kami senang mendengar dari museum, galeri, dan komunitas budaya.",
+    ctaTitle: "Punya cerita untuk dibagikan?",
+    ctaBody:
+      "Kami senang mendengar dari museum, galeri, komunitas dan peminat budaya.",
     ctaButton: "Hubungi kami →",
   },
 };
