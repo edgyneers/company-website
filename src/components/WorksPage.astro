@@ -2,7 +2,8 @@
 import Base from '../layouts/Base.astro';
 import DiamondStrip from './DiamondStrip.astro';
 import YouTubeFacade from './YouTubeFacade.astro';
-import GedoganIllo from './GedoganIllo.astro';
+import { Image } from 'astro:assets';
+import martonunPhoto from '../assets/works/martonun-console.jpg';
 import { t, localePath, type Lang } from '../i18n/ui';
 import { site } from '../config';
 
@@ -45,18 +46,31 @@ const ytUrl = `https://www.youtube.com/watch?v=${site.youtubeId}`;
     <div class="rule-heading py-12"><h2 id="works-title">{p.heading}</h2></div>
 
     <article class="flex flex-wrap overflow-hidden rounded-3xl border border-line bg-white">
-      <div class="flex min-h-[480px] flex-[1_1_380px] items-end justify-center bg-mustard pt-12">
-        <GedoganIllo label={p.illoAlt} />
+      <div class="relative min-h-[420px] flex-[1_1_380px] bg-sand">
+        <Image
+          src={martonunPhoto}
+          alt={p.illoAlt}
+          widths={[480, 760, 1100]}
+          sizes="(max-width: 860px) 100vw, 420px"
+          format="webp"
+          quality={80}
+          loading="lazy"
+          class="absolute inset-0 size-full object-cover object-[50%_60%]"
+        />
       </div>
       <div class="flex min-w-0 flex-[999_1_480px] flex-col gap-6 p-[clamp(28px,4vw,48px)]">
+
         <div class="flex flex-wrap gap-2">
           <span class="chip bg-navy text-cream">{p.featured}</span>
           <span class="chip">{p.type}</span>
           <span class="chip">2026</span>
         </div>
+        
         <h3 class="m-0 font-serif text-[clamp(56px,7vw,96px)] leading-[0.95] font-black tracking-[-0.02em]">Martonun</h3>
         <p class="eyebrow">{p.meaning}</p>
-        <p class="m-0 text-lg leading-[1.65] text-ink-soft">{p.body}</p>
+
+        <p class="m-0 text-md leading-[1.65] text-ink-soft">{p.body}</p>
+
         <ol class="mt-2 grid list-none grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-4 p-0">
           {p.steps.map((s, i) => (
             <li class="flex flex-col gap-1.5 rounded-2xl bg-cream p-[18px]">

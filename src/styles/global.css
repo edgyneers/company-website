@@ -1,6 +1,6 @@
-@import '@fontsource-variable/playfair-display';
-@import '@fontsource-variable/plus-jakarta-sans';
-@import 'tailwindcss';
+@import "@fontsource-variable/playfair-display";
+@import "@fontsource-variable/plus-jakarta-sans";
+@import "tailwindcss";
 
 /* Brand tokens → Tailwind utilities: bg-navy, text-terracotta, font-serif, max-w-wrap, … */
 @theme {
@@ -17,8 +17,8 @@
   --color-muted: #5b5548;
   --color-stone: #c9c4ba;
 
-  --font-serif: 'Playfair Display Variable', Georgia, serif;
-  --font-sans: 'Plus Jakarta Sans Variable', system-ui, sans-serif;
+  --font-serif: "Playfair Display Variable", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans Variable", system-ui, sans-serif;
 
   --container-wrap: 1200px;
 }
@@ -27,29 +27,51 @@
   body {
     @apply flex min-h-screen flex-col bg-cream font-sans leading-normal text-navy;
   }
-  main { @apply flex-[1_0_auto]; }
-  a { @apply text-navy hover:text-terracotta; }
-  :focus-visible { @apply outline-3 outline-offset-3 outline-mustard; }
+  main {
+    @apply flex-[1_0_auto];
+  }
+  a {
+    @apply text-navy hover:text-terracotta;
+  }
+  :focus-visible {
+    @apply outline-3 outline-offset-3 outline-mustard;
+  }
 }
 
 /* Patterns repeated across pages. */
 @layer components {
-  .wrap { @apply mx-auto w-full max-w-wrap px-8; }
+  .wrap {
+    @apply mx-auto w-full max-w-wrap px-7;
+  }
 
-  .eyebrow { @apply m-0 text-sm font-bold tracking-[0.16em] text-terracotta uppercase; }
+  .eyebrow {
+    @apply m-0 text-sm font-bold tracking-[0.16em] text-terracotta uppercase;
+  }
 
   .btn {
     @apply inline-flex min-h-12 items-center rounded-full border-[1.5px] border-transparent px-[22px] text-[15px] font-bold no-underline;
   }
-  .btn-dark { @apply bg-navy text-cream hover:text-mustard-light; }
-  .btn-outline { @apply border-navy; }
-  .btn-mustard { @apply bg-mustard text-navy hover:bg-mustard-light hover:text-navy; }
-  .btn-cream { @apply bg-cream text-navy; }
+  .btn-dark {
+    @apply bg-navy text-cream hover:text-mustard-light;
+  }
+  .btn-outline {
+    @apply border-navy;
+  }
+  .btn-mustard {
+    @apply bg-mustard text-navy hover:bg-mustard-light hover:text-navy;
+  }
+  .btn-cream {
+    @apply bg-cream text-navy;
+  }
 
-  .chip { @apply rounded-full bg-cream px-3 py-1.5 text-[13px] font-semibold; }
+  .chip {
+    @apply rounded-full bg-cream px-3 py-1.5 text-[13px] font-semibold;
+  }
 
   /* Big headline with a trailing rule, like the "Team" post. */
-  .rule-heading { @apply flex items-end gap-6 after:mb-[22px] after:h-[1.5px] after:flex-auto after:bg-navy after:content-['']; }
+  .rule-heading {
+    @apply flex items-end gap-6 after:mb-[22px] after:h-[1.5px] after:flex-auto after:bg-navy after:content-[''];
+  }
   .rule-heading > :is(h1, h2) {
     @apply m-0 font-serif text-[clamp(64px,10vw,136px)] leading-[0.9] font-black tracking-[-0.03em];
   }
