@@ -33,17 +33,13 @@ const en = {
     featured: "Featured",
     type: "Interactive installation",
     meaning: "Batak for “to weave”",
-    body: "A museum installation where visitors weave their own ulos — the Batak ceremonial cloth — on a gedogan, the traditional loom. A physical console stands in for the loom: lift the handle, move the slider, and an iPad guides every pass. Each finished cloth joins the ulos projected onto white fabric, from one visitor to the next.",
-    steps: [
-      "Start the game",
-      "Move the console",
-      "See your ulos on the cloth",
-    ],
+    body: "A museum installation where visitors weave their own ulos — the Batak ceremonial cloth — on a gedogan (the traditional loom). A physical console stands in for the loom: lift the handle, move the slider, and an iPad guides every pass. Each finished cloth joins the ulos projected onto white fabric, from one visitor to the next.",
+    steps: ["Start the game", "Move the console", "See your ulos on the cloth"],
     builtWith: "Built with",
     builtWithValue:
       "iPadOS app · ESP32 console over Wi-Fi · Projection mapping on fabric",
     shownAt: "Shown at",
-    shownAtValue: "Museum Tekstil Jakarta (Jan - Mar 2027)",
+    shownAtValue: "Museum Tekstil Jakarta (soon, from January 2027)",
     watchFilm: "Watch the video ↗",
     caseStudy: "See the journey →",
     illoAlt:
@@ -132,13 +128,13 @@ const id: typeof en = {
     featured: "Sorotan",
     type: "Instalasi interaktif",
     meaning: "Bahasa Batak untuk “menenun”",
-    body: "Instalasi museum tempat pengunjung menenun ulos — kain adat Batak — mereka sendiri di atas gedogan, alat tenun tradisional. Sebuah konsol fisik menggantikan alat tenunnya: angkat handle, geser slider, dan iPad memandu setiap langkah. Setiap kain yang selesai menyambung ke ulos yang diproyeksikan ke kain putih, dari satu pengunjung ke pengunjung berikutnya.",
+    body: "Instalasi museum tempat pengunjung menenun ulos — kain adat Batak — mereka sendiri di atas gedogan (alat tenun tradisional). Sebuah konsol fisik menggantikan alat tenunnya: angkat handle, geser slider, dan iPad memandu setiap langkah. Setiap kain yang selesai menyambung ke ulos yang diproyeksikan ke kain putih, dari satu pengunjung ke pengunjung berikutnya.",
     steps: ["Mulai permainan", "Gerakkan konsol", "Lihat ulosmu di kain"],
     builtWith: "Dibuat dengan",
     builtWithValue:
       "Aplikasi iPadOS · Konsol ESP32 via Wi-Fi · Projection mapping di kain",
     shownAt: "Dipamerkan di",
-    shownAtValue: "Museum Tekstil Jakarta (Jan - Mar 2027)",
+    shownAtValue: "Museum Tekstil Jakarta — segera, mulai Januari 2027",
     watchFilm: "Tonton video ↗",
     caseStudy: "Lihat perjalanannya →",
     illoAlt:
