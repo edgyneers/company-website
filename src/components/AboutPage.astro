@@ -19,8 +19,9 @@ const memberLink =
     <DiamondStrip id="dm-about" orientation="vertical" size={96} />
     <div class="mx-auto flex max-w-[1104px] min-w-0 flex-auto flex-col gap-8 px-8 pt-[clamp(64px,9vw,112px)] pb-24">
       <div class="rule-heading"><h1 id="about-title" class="text-[clamp(72px,12vw,160px)]! leading-[0.85]!">{a.heading}</h1></div>
-      <p class="m-0 text-[22px] font-medium">{site.name}</p>
-      <p class="m-0 max-w-[820px] font-serif text-[clamp(24px,3vw,38px)] leading-[1.3] font-bold">{a.lead}</p>
+      <div class="flex max-w-[820px] flex-col gap-6 font-serif text-[clamp(24px,3vw,38px)] leading-[1.3] font-bold">
+        {a.lead.map((para) => <p class="m-0">{para}</p>)}
+      </div>
     </div>
   </section>
 

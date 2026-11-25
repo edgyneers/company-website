@@ -54,7 +54,10 @@ const en = {
 
   about: {
     heading: "About",
-    lead: "We’re a small studio from Indonesia making heritage something you can hold, move and play — not just look at behind glass.",
+    lead: [
+      "Wastara is a technology-driven creative studio exploring Indonesian culture through a blend of design, technology and storytelling.",
+      "We weave cultural heritage back into experiences that can be touched, explored and understood from a fresh perspective.",
+    ],
     storyLabel: "Our story",
     storyTitle: "Born at the Apple Developer Academy @ BINUS.",
     story: [
@@ -138,7 +141,10 @@ const id: typeof en = {
 
   about: {
     heading: "Tentang",
-    lead: "Kami studio kecil dari Indonesia yang ingin warisan budaya bisa dipegang, digerakkan, dan dimainkan — bukan hanya dilihat dari balik kaca.",
+    lead: [
+      "Wastara adalah studio kreatif berbasis teknologi yang mengeksplorasi budaya Indonesia melalui perpaduan desain, teknologi, dan cerita.",
+      "Merangkai kembali warisan budaya ke dalam pengalaman yang dapat disentuh, dijelajahi, dan dimaknai melalui perspektif baru.",
+    ],
     storyLabel: "Cerita kami",
     storyTitle: "Lahir di Apple Developer Academy @ BINUS.",
     story: [
